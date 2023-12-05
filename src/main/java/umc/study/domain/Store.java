@@ -2,8 +2,6 @@ package umc.study.domain;
 
 import lombok.*;
 import umc.study.domain.common.BaseEntity;
-import umc.study.domain.enums.Gender;
-import umc.study.domain.enums.mapping.MemberAgree;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,20 +18,19 @@ public class Store extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id")
-    private Region region;
-
     private String name;
 
-    @Column(columnDefinition = "VARCHAR(50)")
     private String address;
 
     private Float score;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
+
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Mission> missionList = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
-//    private List<Review> ReiviewList = new ArrayList<>();
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
 }
