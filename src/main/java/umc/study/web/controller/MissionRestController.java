@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import umc.study.ApiPayload.ApiResponse;
 import umc.study.ApiPayload.code.status.SuccessStatus;
-import static umc.study.ApiPayload.code.status.SuccessStatus._OK;
 import umc.study.converter.MissionConverter;
 import umc.study.converter.StoreConverter;
 import umc.study.domain.Mission;
