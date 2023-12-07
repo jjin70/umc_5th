@@ -17,7 +17,7 @@ public class MissionConverter {
                 .build();
     }
 
-    public static MissionResponseDTO.toAddMissionDTO toAddMissionDTO (Mission mission){
+    public static MissionResponseDTO.toAddMissionDTO toAddMissionDTO (Mission mission) {
         return MissionResponseDTO.toAddMissionDTO.builder()
                 .missionId(mission.getId())
                 .createdAt(LocalDateTime.now())
