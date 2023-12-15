@@ -7,17 +7,21 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.study.ApiPayload.ApiResponse;
 import umc.study.converter.StoreConverter;
 import umc.study.domain.Review;
+import umc.study.service.MemberService.MemberQueryService;
 import umc.study.service.StoreService.StoreCommandService;
 import umc.study.service.StoreService.StoreQueryService;
 import umc.study.validation.annotation.ExistMember;
 import umc.study.validation.annotation.ExistStore;
+import umc.study.validation.annotation.ExistPage;
 import umc.study.web.dto.StoreRequestDTO;
 import umc.study.web.dto.StoreResponseDTO;
+import umc.study.web.dto.MemberResponseDTO;
 
 import javax.validation.Valid;
 
@@ -54,4 +58,5 @@ public class StoreRestController {
         storeQueryService.getReviewList(storeId,page);
         return null;
     }
+
 }
