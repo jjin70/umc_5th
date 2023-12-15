@@ -8,12 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 import umc.study.ApiPayload.code.status.ErrorStatus;
 import umc.study.ApiPayload.exception.handler.MemberHandler;
 import umc.study.domain.Member;
+import umc.study.domain.enums.mapping.MemberMission;
+import umc.study.repository.MemberMissionRepository;
 import umc.study.repository.MemberRepository;
 import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.repository.ReviewRepository;
 import umc.study.repository.StoreRepository;
 import umc.study.validation.annotation.ExistPage;
+import umc.study.domain.enums.MissionStatus;
 
 import java.util.Optional;
 
@@ -26,6 +29,7 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     private final StoreRepository storeRepository;
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
+    private final MemberMissionRepository memberMissionRepository;
 
     @Override
     public Optional<Store> findStore(Long storeId) {
@@ -46,5 +50,13 @@ public class StoreQueryServiceImpl implements StoreQueryService{
 
         Page<Review> reviewPage = reviewRepository.findAllByMember(member, PageRequest.of(page, 10));
         return reviewPage;
+    }
+
+    @Override
+    public Page<MemberMission> getMyMissionList(String missionStatus, @ExistPage Integer page) {
+        Member member = memberRepository.findById(1L).orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        Page<MemberMission> usermissions = memberMissionRepository.findAllByMemberAndMissionStatus(member, MissionStatus.valueOf(missionStatus), PageRequest.of(page, 10));
+        return usermissions;
     }
 }
